@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO アプリ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+
+            <header class="card-header">
+                <h1>TODO</h1>
+                <span class="total-badge">{{ total }}</span>
+            </header>
+
+            <form class="add-form" action="/add" method="POST">
+                <input type="hidden" name="filter" value="{{ filter }}">
+                <input
+                    type="text"
+                    name="title"
+                    class="add-input"
+                    placeholder="新しいタスクを追加..."
+                    autocomplete="off"
+                    autofocus
+                >
+                <button type="submit" class="add-btn" aria-label="追加">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                    </svg>
+                </button>
+            </form>
+
+            <div class="filter-tabs">
+                <a href="/?filter=all" class="filter-tab {% if filter == 'all' %}active{% endif %}">
+                    すべて <span class="tab-count">{{ total }}</span>
+                </a>
+                <a href="/?filter=active" class="filter-tab {% if filter == 'active' %}active{% endif %}">
+                    未完了 <span class="tab-count">{{ active_count }}</span>
+                </a>
+                <a href="/?filter=completed" class="filter-tab {% if filter == 'completed' %}active{% endif %}">
+                    完了済み <span class="tab-count">{{ completed_count }}</span>
+                </a>
+            </div>
+
+            <ul class="todo-list">
+                {% if todos %}
+                    {% for todo in todos %}
+                    <li class="todo-item{% if todo.completed %} completed{% endif %}">
+
+                        <form action="/toggle/{{ todo.id }}" method="POST" class="toggle-form">
+                            <input type="hidden" name="filter" value="{{ filter }}">
+                            <button type="submit" class="toggle-btn" title="完了/未完了を切替">
+                                {% if todo.completed %}
+                                <svg viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="11" fill="#667eea"/>
+                                    <path d="M7 12l4 4 6-7" stroke="white" stroke-width="2.2"
+                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                {% else %}
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="11"/>
+                                </svg>
+                                {% endif %}
+                            </button>
+                        </form>
+
+                        <span class="todo-label">{{ todo.title }}</span>
+
+                        <form action="/edit/{{ todo.id }}" method="POST" class="edit-form">
+                            <input type="hidden" name="filter" value="{{ filter }}">
+                            <input type="text" name="title" class="edit-input" value="{{ todo.title }}">
+                        </form>
+
+                        <form action="/delete/{{ todo.id }}" method="POST" class="delete-form">
+                            <input type="hidden" name="filter" value="{{ filter }}">
+                            <button type="submit" class="delete-btn" title="削除">
+                                <svg viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </form>
+
+                    </li>
+                    {% endfor %}
+                {% else %}
+                    <li class="empty-state">
+                        {% if filter == 'completed' %}
+                            完了したタスクはありません
+                        {% elif filter == 'active' %}
+                            すべてのタスクが完了しています &#x1F389;
+                        {% else %}
+                            タスクを追加してみましょう！
+                        {% endif %}
+                    </li>
+                {% endif %}
+            </ul>
+
+            {% if total > 0 %}
+            <footer class="card-footer">
+                <span class="active-count">残り {{ active_count }} 件</span>
+                {% if completed_count > 0 %}
+                <form action="/clear-completed" method="POST" style="margin:0">
+                    <input type="hidden" name="filter" value="{{ filter }}">
+                    <button type="submit" class="clear-btn">完了済みを削除</button>
+                </form>
+                {% endif %}
+            </footer>
+            {% endif %}
+
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

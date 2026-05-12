@@ -1,0 +1,298 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 20px 80px;
+}
+
+.container {
+    width: 100%;
+    max-width: 560px;
+}
+
+/* ── Card ── */
+.card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+    overflow: hidden;
+}
+
+/* ── Header ── */
+.card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 32px 32px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-header h1 {
+    color: #fff;
+    font-size: 2.6rem;
+    font-weight: 800;
+    letter-spacing: 0.35em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.total-badge {
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 20px;
+    min-width: 42px;
+    text-align: center;
+}
+
+/* ── Add Form ── */
+.add-form {
+    padding: 20px 24px;
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.add-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 0.975rem;
+    color: #1f2937;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fafafa;
+}
+
+.add-input::placeholder { color: #9ca3af; }
+
+.add-input:focus {
+    border-color: #667eea;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.14);
+}
+
+.add-btn {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s, transform 0.15s;
+}
+
+.add-btn:hover  { opacity: 0.88; transform: scale(1.06); }
+.add-btn:active { transform: scale(0.96); }
+
+/* ── Filter Tabs ── */
+.filter-tabs {
+    display: flex;
+    padding: 0 20px;
+    border-bottom: 1px solid #f1f1f1;
+    gap: 2px;
+}
+
+.filter-tab {
+    padding: 12px 14px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.18s, border-color 0.18s;
+    white-space: nowrap;
+}
+
+.filter-tab:hover { color: #667eea; }
+
+.filter-tab.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+
+.tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: #f3f4f6;
+    border-radius: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #6b7280;
+    transition: background 0.18s, color 0.18s;
+}
+
+.filter-tab.active .tab-count {
+    background: rgba(102, 126, 234, 0.13);
+    color: #667eea;
+}
+
+/* ── Todo List ── */
+.todo-list {
+    list-style: none;
+    max-height: 58vh;
+    overflow-y: auto;
+}
+
+.todo-list::-webkit-scrollbar { width: 4px; }
+.todo-list::-webkit-scrollbar-track { background: transparent; }
+.todo-list::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 2px;
+}
+
+/* ── Todo Item ── */
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    min-height: 56px;
+    border-bottom: 1px solid #f7f7f8;
+    gap: 10px;
+    transition: background 0.12s;
+}
+
+.todo-item:last-child { border-bottom: none; }
+.todo-item:hover { background: #fafafa; }
+
+/* Toggle */
+.toggle-form { flex-shrink: 0; }
+
+.toggle-btn {
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s;
+}
+
+.toggle-btn:hover { transform: scale(1.12); }
+
+.toggle-btn svg { width: 24px; height: 24px; }
+
+/* Label */
+.todo-label {
+    flex: 1;
+    font-size: 0.975rem;
+    color: #1f2937;
+    line-height: 1.45;
+    word-break: break-word;
+    cursor: default;
+    user-select: none;
+    padding: 14px 0;
+}
+
+.todo-item.completed .todo-label {
+    text-decoration: line-through;
+    color: #9ca3af;
+}
+
+/* Edit form (shown only when .editing) */
+.edit-form { display: none; flex: 1; }
+
+.edit-input {
+    width: 100%;
+    padding: 7px 10px;
+    border: 2px solid #667eea;
+    border-radius: 7px;
+    font-size: 0.975rem;
+    color: #1f2937;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.14);
+}
+
+.todo-item.editing .todo-label,
+.todo-item.editing .toggle-form,
+.todo-item.editing .delete-form {
+    display: none;
+}
+
+.todo-item.editing .edit-form { display: flex; align-items: center; }
+
+/* Delete */
+.delete-form { flex-shrink: 0; }
+
+.delete-btn {
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #d1d5db;
+    opacity: 0;
+    transition: color 0.18s, opacity 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todo-item:hover .delete-btn { opacity: 1; }
+.delete-btn:hover { color: #f87171; }
+
+/* Empty state */
+.empty-state {
+    padding: 48px 24px;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.925rem;
+}
+
+/* ── Footer ── */
+.card-footer {
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f9fafb;
+    border-top: 1px solid #f1f1f1;
+}
+
+.active-count {
+    font-size: 0.85rem;
+    color: #6b7280;
+}
+
+.clear-btn {
+    background: none;
+    border: none;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: color 0.18s, background 0.18s;
+}
+
+.clear-btn:hover {
+    color: #f87171;
+    background: #fef2f2;
+}
