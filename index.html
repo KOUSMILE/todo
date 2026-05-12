@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO アプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+
+            <header class="card-header">
+                <h1>TODO</h1>
+                <span class="total-badge" id="total-badge">0</span>
+            </header>
+
+            <div class="add-form">
+                <input
+                    type="text"
+                    id="add-input"
+                    class="add-input"
+                    placeholder="新しいタスクを追加..."
+                    autocomplete="off"
+                >
+                <button id="add-btn" class="add-btn" aria-label="追加">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">
+                    すべて <span class="tab-count" id="count-all">0</span>
+                </button>
+                <button class="filter-tab" data-filter="active">
+                    未完了 <span class="tab-count" id="count-active">0</span>
+                </button>
+                <button class="filter-tab" data-filter="completed">
+                    完了済み <span class="tab-count" id="count-completed">0</span>
+                </button>
+            </div>
+
+            <ul class="todo-list" id="todo-list"></ul>
+
+            <footer class="card-footer" id="card-footer">
+                <span class="active-count" id="active-count-text"></span>
+                <button class="clear-btn" id="clear-btn">完了済みを削除</button>
+            </footer>
+
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
