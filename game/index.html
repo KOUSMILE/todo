@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>思考のかけら</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top">
+        <div>
+            <h1>思考のかけら</h1>
+            <p class="subtitle">探索して考えを拾い、組み合わせ、問いに答える</p>
+        </div>
+        <button id="reset-btn" class="ghost">はじめから</button>
+    </header>
+
+    <nav id="map" class="map" aria-label="場所"></nav>
+
+    <main class="layout">
+        <section id="scene" class="panel scene"></section>
+
+        <aside class="panel notebook">
+            <div class="notebook-head">
+                <h2>思考ノート</h2>
+                <span id="piece-count" class="count"></span>
+            </div>
+            <div id="notebook-tools" class="notebook-tools"></div>
+            <div id="pieces" class="pieces"></div>
+        </aside>
+    </main>
+
+    <div id="ending" class="ending" hidden>
+        <div class="ending-card">
+            <h2>あなたは、誰か</h2>
+            <div id="ending-body"></div>
+            <button id="ending-close" class="primary">閉じる</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
